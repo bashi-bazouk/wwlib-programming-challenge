@@ -49,19 +49,17 @@ class Main extends React.Component {
             this.loop = setInterval(() => { this.step() }, this.props.interval);
     };
 
-    stop() {
+    stop = () => {
         if(this.loop)
             clearInterval(this.loop);
             this.loop = null;
     }
 
-    setSize(maybe_size) {
+    setSize = (maybe_size) => {
         if(!maybe_size) {
-            this.setState({ size_modal: true })
+            this.setState({ size: 7, time: -1 });
         } else {
-            this.state.size = maybe_size;
-            this.state.time = -1;
-            this.setState({ size: maybe_size, time: -1, size_modal: false });
+            this.setState({ size: maybe_size, time: -1 });
         }
 
 
