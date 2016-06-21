@@ -1,0 +1,261 @@
+$CONTENT-PADDING: 2vmin;
+$MONOCHROME: #ccdce9;
+$TEXT-COLOR: white;
+
+@mixin centering-one {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > * {
+    flex: 0 0 auto;
+  }
+}
+
+@mixin rotating($deg) {
+  -moz-transform: rotate($deg);
+  -webkit-transform: rotate($deg);
+  -o-transform: rotate($deg);
+  -ms-transform: rotate($deg);
+  transform: rotate($deg);
+}
+
+body {
+
+  width: 100vw;
+  height: 100vh;
+  padding: $CONTENT-PADDING;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: $TEXT-COLOR;
+  background-color: black;
+}
+
+button, textarea, input {
+  outline: none;
+  outline-color: transparent;
+  outline-style: none;
+}
+
+#react-application {
+  box-sizing: padding-box;
+  display: flex;
+}
+
+
+.board {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  border: 1px solid $MONOCHROME;
+  border-radius: 2px;
+
+  > .row {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+
+    border-top: 1px solid $MONOCHROME;
+    &:first-child { border-top: none; }
+
+    > .cell {
+      flex: 1 0 0;
+      position: relative;
+      @include centering-one();
+
+      border-left: 1px solid $MONOCHROME;
+      &:first-child { border-left: none; }
+
+      .cursor {
+        width: 90%;
+        height: 90%;
+        border: 1px solid $MONOCHROME;
+        border-radius: 30%;
+
+        &.populated {
+          background-color: $MONOCHROME;
+        }
+      }
+
+      &:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 1px;
+
+        content: "";
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMTAwcHgiIGhlaWdodD0iODZweCIgdmlld0JveD0iMTY4LjUgMCAxMDAgODYiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMTY4LjUgMCAxMDAgODYiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTE3Ni44Niw0M2MwLDEuOTM2LDEuNTc0LDMuNTA5LDMuNTA5LDMuNTA5aDY4Ljc4M2wtMTUuMDc1LDE1LjA3NWMtMS4zNjcsMS4zNjgtMS4zNjcsMy41OTYsMCw0Ljk2Mw0KCQlzMy41OTQsMS4zNjcsNC45NjIsMGwyMS4wNjktMjEuMDdjMC4zMjctMC4zMjYsMC41ODYtMC43MDUsMC43NTgtMS4xMzVzMC4yNjYtMC44NzcsMC4yNjYtMS4zMjVjMC0wLjAwOCwwLTAuMDA4LDAtMC4wMTdsMCwwDQoJCWMwLTAuNDU2LTAuMDk0LTAuOTEyLTAuMjc0LTEuMzQyYy0wLjE3My0wLjQzLTAuNDM4LTAuODE3LTAuNzU3LTEuMTM1bC0yMS4wNy0yMS4wN2MtMS4zNjctMS4zNjctMy41OTUtMS4zNjctNC45NjIsMA0KCQljLTEuMzY4LDEuMzY4LTEuMzY4LDMuNTk1LDAsNC45NjJsMTUuMDc1LDE1LjA3NmgtNjguNzc0QzE3OC40MzQsMzkuNDkxLDE3Ni44Niw0MS4wNjUsMTc2Ljg2LDQzeiIvPg0KPC9nPg0KPC9zdmc+DQo=);
+        background-size: 2em;
+        background-repeat: no-repeat;
+        background-position: center;
+
+      }
+
+      &[data-direction="d"]:before { @include rotating(90deg) }
+      &[data-direction="l"]:before { @include rotating(180deg) }
+      &[data-direction="u"]:before { @include rotating(270deg) }
+
+    }
+  }
+}
+
+[role="toolbar"] {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+
+  > button {
+    flex: 0 0 auto;
+    border: 1px solid $MONOCHROME;
+    padding: 1em;
+    box-sizing: border-box;
+
+    border-radius: 2px;
+
+    color: $TEXT-COLOR;
+
+    overflow: hidden;
+  }
+}
+
+
+
+// Landscape Mode: Buttons on the right, maintain a 4:3 aspect ratio.
+
+@media all and (orientation: landscape) {
+  body {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  #react-application {
+    flex-direction: row;
+    height: calc(75vw - 2*#{$CONTENT-PADDING});
+    width: calc(100vw - 2*#{$CONTENT-PADDING});
+  }
+
+  .board {
+    height: 72vw;
+    width: 72vw;
+  }
+
+  [role="toolbar"] {
+    height: 72vw;
+    width: 24vw;
+    padding: 2vw;
+
+    flex-direction: column;
+    justify-content: space-around;
+
+    > button {
+      width: 20vw;
+      white-space: nowrap;
+      cursor: pointer;
+      &:active {
+        background-color: $MONOCHROME;
+      }
+    }
+  }
+}
+
+@media all and (min-aspect-ratio: 4/3) {
+  body {
+    justify-content: center;
+    align-items: center;
+  }
+
+  #react-application {
+    height: calc(100vh - 2*#{$CONTENT-PADDING});
+    width: calc(133.3vh - 2*#{$CONTENT-PADDING});
+  }
+
+  .board {
+    height: 96vh;
+    width: 96vh;
+  }
+
+  [role="toolbar"] {
+    height: 96vh;
+    width: 32vh;
+    padding: 2vh;
+
+    > button {
+      width: 28vh;
+    }
+  }
+}
+
+// Portrait Mode: Buttons on the bottom. Maintain a 3:4 aspect ratio.
+
+@media all and (orientation: portrait) {
+  body {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  #react-application {
+    flex-direction: column;
+    height: calc(100vh - 2*#{$CONTENT-PADDING});
+    width: 72vh;
+  }
+
+  .board {
+    height: 72vh;
+    width: 72vh;
+  }
+
+
+  [role="toolbar"] {
+    height: 24vh;
+    width: 72vh;
+    padding: 1vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > button {
+      margin: 0 6vh;
+      width: 21vh;
+    }
+  }
+}
+
+@media all and (max-aspect-ratio: 3/4) {
+  body {
+    justify-content: center;
+    align-items: center;
+  }
+
+  #react-application {
+    height: calc(100vh - 2*#{$CONTENT-PADDING});
+    width: calc(75vh - 2*#{$CONTENT-PADDING});
+    justify-content: center;
+    align-items: center;
+  }
+
+  .board {
+    height: 96vw;
+    width: 96vw;
+  }
+
+
+  [role="toolbar"] {
+    height: 24vw;
+    width: 96vw;
+    padding: 1vw;
+    flex-direction: row;
+
+    > button {
+      flex: 0 0 auto;
+      margin: 0 7vw;
+      width: 28vw;
+    }
+  }
+}
