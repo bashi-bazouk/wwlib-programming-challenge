@@ -19,6 +19,12 @@ $TEXT-COLOR: white;
   transform: rotate($deg);
 }
 
+@mixin box-shadow($h, $v, $b, $s, $c) {
+  -webkit-box-shadow: $h $v $b $s $c;
+  -moz-box-shadow: $h $v $b $s $c;
+  box-shadow: $h $v $b $s $c;
+}
+
 body {
 
   width: 100vw;
@@ -38,6 +44,12 @@ button, textarea, input {
   outline: none;
   outline-color: transparent;
   outline-style: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #react-application {
@@ -124,6 +136,67 @@ button, textarea, input {
     color: $TEXT-COLOR;
 
     overflow: hidden;
+  }
+}
+
+#impromptu-modal-stack {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  font-size: 1.5em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.8);
+
+  #size-modal {
+    @include box-shadow(0,0, 35px, 5px, black);
+    flex: 0 0 auto;
+
+    padding: 1em;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    border: 1px solid $MONOCHROME;
+    border-radius: 2px;
+
+    background-color: black;
+
+    > * {
+      font-size: 1em;
+    }
+
+    h3 {
+      font-family: BlinkMacSystemFont;
+      text-align: center;
+    }
+
+    input {
+      margin-top: 3vmin;
+      text-align: center;
+      color: white;
+      border: 1px solid $MONOCHROME;
+      border-radius: 2px;
+    }
+
+    button {
+      padding: 0.5em;
+      margin-top: 3vmin;
+      border: 1px solid $MONOCHROME;
+      border-radius: 2px;
+      color: white;
+      cursor: pointer;
+    }
+
   }
 }
 
@@ -247,7 +320,7 @@ button, textarea, input {
 
 
   [role="toolbar"] {
-    height: 24vw;
+    height: 36vw;
     width: 96vw;
     padding: 1vw;
     flex-direction: row;

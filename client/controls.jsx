@@ -32,7 +32,7 @@ class Controls extends React.Component {
     }
 
     onSetSize = () => {
-        this.props.control.setSize();
+        this.props.control.set_size();
     }
 }
 

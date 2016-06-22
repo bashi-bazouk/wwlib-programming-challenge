@@ -27,6 +27,7 @@ module.exports = {
             {test: /\.ttf$/, loader: "file-loader?prefix=font/"},
             {test: /\.svg$/, loader: "url-loader"},
             {test: /\.md$/, loader: "raw-loader"},
+            {test: /\.wav$/, loader: "url-loader"},
             {test: /\.scss$/, loaders: ["style", "css", "sass"]},
             {test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/, query: {
                 plugins: ['transform-class-properties', 'extensible-destructuring'],

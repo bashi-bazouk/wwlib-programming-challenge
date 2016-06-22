@@ -10,6 +10,10 @@ class Board extends React.Component {
         this.state = { time: -1 };
     }
 
+    componentWillReceiveProps = ({ time }) => {
+        this.setState({ time })
+    };
+
     generate_board = () => {
         var size = this.props.size;
         if(size > 0) {
@@ -164,10 +168,6 @@ class Board extends React.Component {
         }
 
         return <div className="board">{ rows }</div>;
-    }
-
-    componentWillReceiveProps = ({ time }) => {
-        this.setState({ time })
     }
 }
 
